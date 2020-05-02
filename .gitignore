@@ -3,3 +3,4 @@
 /Scripts
 pyvenv.cfg
 *.pyc
+testbed.py
