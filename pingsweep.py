@@ -8,7 +8,7 @@ pythonping
 """
 __author__ = 'Xander Petty'
 __contact__ = 'Alexander.Petty@williams.com'
-__version__ = '0.0'
+__version__ = '1.0'
 
 from ipaddress import ip_network
 from pythonping import ping 
@@ -55,5 +55,8 @@ def main(network, ping_count, max_threads):
 network = input('Please enter a network and cidr pair: ')
 count = int(input('How many pings each?: '))
 max_threads = int(input('What is the maximum thread count?: '))
+# network = '192.168.0.0/27'
+# count = 4 
+# max_threads = 40
 
 main(network, count, max_threads)
