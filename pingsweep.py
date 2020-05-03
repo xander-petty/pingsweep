@@ -5,6 +5,7 @@ Required Modules:
 ipaddress
 pprint
 pythonping
+scapy
 """
 __author__ = 'Xander Petty'
 __contact__ = 'Alexander.Petty@williams.com'
