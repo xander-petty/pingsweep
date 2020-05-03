@@ -18,10 +18,18 @@ from queue import Queue
 import sys 
 import os 
 from time import sleep 
+<<<<<<< HEAD
+=======
+import csv 
+>>>>>>> WIP
 
 thread_lock = Lock()
 receive_q = Queue()
 output = []
+<<<<<<< HEAD
+=======
+offline = []
+>>>>>>> WIP
 all_threads = [] # For debugging purposes. Daemon's close with the process 
 
 ##########################
@@ -31,6 +39,10 @@ all_threads = [] # For debugging purposes. Daemon's close with the process
 network = input('Enter network with CIDR: ')
 ping_count = int(input('Enter the number of ping retries: '))
 max_threads = int(input('Enter the maximum number of threads: '))
+<<<<<<< HEAD
+=======
+file_name = input('Enter the name of the output file (.csv): ')
+>>>>>>> WIP
 ##########################
 
 def make_packet(ip):
@@ -44,6 +56,11 @@ def locked_ping(packet):
         # print(str(f'Pinging: {packet.dst}'))
         if reply != None:
             output.append(reply)
+<<<<<<< HEAD
+=======
+        else:
+            offline.append(ip_address(packet.dst))
+>>>>>>> WIP
 
 def receive_daemon():
     while True:
@@ -68,9 +85,37 @@ online = []
 for ip in output:
     online.append(ip_address(ip.src))
 online = sorted(online)
+<<<<<<< HEAD
+=======
+offline = sorted(offline)
+>>>>>>> WIP
 wait = ((len(list(ip_network(network))) * 2) / max_threads) * ping_count
 # sleep(wait)
 print('#############################################')
 print('###                 ONLINE                ###')
 print('#############################################')
 pprint(online)
+<<<<<<< HEAD
+=======
+
+database = []
+for ip in online:
+    data = {
+        'IP': str(ip),
+        'Online': True
+    }
+    database.append(data)
+for ip in offline:
+    data = {
+        'IP': str(ip),
+        'Online': False
+    }
+    database.append(data)
+
+# Adding to CSV File 
+with open(file_name, 'w') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=list(database[0].keys()))
+    writer.writeheader()
+    writer.writerows(database)
+csvfile.close()
+>>>>>>> WIP

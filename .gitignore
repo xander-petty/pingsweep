@@ -4,5 +4,6 @@
 pyvenv.cfg
 *.pyc
 testbed.py
-scapytest.py
 /share
+*.csv
+scapytest.py
