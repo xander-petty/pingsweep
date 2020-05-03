@@ -7,6 +7,7 @@ Required modules:
 pythonping 
 ipaddress 
 pprint 
+scapy
 
 COMMANDS TO PREPEARE YOUR ENVIRONMENT (Run from PowerShell)
 ############################################################################
