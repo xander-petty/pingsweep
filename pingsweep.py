@@ -1,6 +1,10 @@
 """
-This is a test of building a multithreaded ping tool with
-manual packet crafting and thread daemons
+This is a scalable thread based ping tool 
+
+Required Modules:
+ipaddress
+pprint
+pythonping
 """
 __author__ = 'Xander Petty'
 __contact__ = 'Alexander.Petty@williams.com'
