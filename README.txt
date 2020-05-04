@@ -17,6 +17,7 @@ python -m venv .
 pip install --upgrade pip wheel setuptools 
 pip install pythonping
 pip install ipaddress 
+pip install scapy
 pip install pprint 
 ############################################################################
 
