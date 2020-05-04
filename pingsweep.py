@@ -9,7 +9,7 @@ scapy
 """
 __author__ = 'Xander Petty'
 __contact__ = 'Alexander.Petty@williams.com'
-__version__ = '1.0'
+__version__ = '1.4'
 
 from ipaddress import ip_network, ip_address
 from scapy.all import IP, ICMP, sr1
