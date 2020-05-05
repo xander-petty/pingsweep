@@ -8,7 +8,7 @@ pythonping
 ipaddress 
 pprint 
 scapy
-
+    
 COMMANDS TO PREPEARE YOUR ENVIRONMENT (Run from PowerShell)
 ############################################################################
 Set-ExecutionPolicy Remote-Signed -Force 
@@ -17,8 +17,8 @@ python -m venv .
 pip install --upgrade pip wheel setuptools 
 pip install pythonping
 pip install ipaddress 
-pip install scapy
 pip install pprint 
+pip install scapy
 ############################################################################
 
 
