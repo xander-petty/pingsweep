@@ -9,7 +9,7 @@ scapy
 """
 __author__ = 'Xander Petty'
 __contact__ = 'Alexander.Petty@williams.com'
-__version__ = '1.5'
+__version__ = '1.6'
 
 from ipaddress import ip_network, ip_address 
 from scapy.all import IP, ICMP, sr1 
@@ -36,6 +36,7 @@ class Application(tkinter.Frame):
         tkinter.Frame.__init__(self, master)
         # Front-End Setup 
         self.master = master 
+        self.master.title("Pingsweep Tool")
         self.grid()
         self.create_widgets()
         # Back-End Setup 
