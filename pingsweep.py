@@ -15,6 +15,7 @@ from ipaddress import ip_network, ip_address
 from scapy.all import IP, ICMP, sr1 
 from pprint import pprint 
 from threading import Thread, Lock 
+from multiprocessing import Process
 from queue import Queue 
 from tkinter import font 
 import tkinter 
@@ -57,6 +58,7 @@ class Application(tkinter.Frame):
         self.file_entry()
         self.quit_button()
         self.submit_button()
+        self.status_label()
     def header_label(self):
         self.header_label = tkinter.Label(self)
         self.header_label['font'] = font.Font(size=16)
@@ -108,8 +110,13 @@ class Application(tkinter.Frame):
         self.submit_button = tkinter.Button(self)
         self.submit_button['font'] = font.Font(size=12)
         self.submit_button['text'] = str('SUBMIT')
-        self.submit_button['command'] = lambda: self.main()
+        self.submit_button['command'] = lambda: self.main_function()
         self.submit_button.grid(row=10, column=3, pady=2)
+    def status_label(self):
+        self.status_label = tkinter.Label(self)
+        self.status_label['font'] = font.Font(size=13)
+        self.status_label['text'] = str('Status: Not started')
+        self.status_label.grid(row=12, column=0, pady=2)
     def make_packet(self, ip):
         packet = IP(dst=str(ip), ttl=20)/ICMP()
         self.receive_q.put(packet)
@@ -132,7 +139,7 @@ class Application(tkinter.Frame):
             self.online.append(ip_address(ip.src))
         self.online = sorted(self.online)
         self.offline = sorted(self.offline)
-        pprint(self.online)
+        # pprint(self.online)
         for ip in self.online:
             data = {
                 'IP': str(ip),
@@ -150,7 +157,9 @@ class Application(tkinter.Frame):
             writer.writeheader()
             writer.writerows(self.database)
         csvfile.close()
-    def main(self):
+    def main_window(self):
+        self.status_label['bg'] = 'red'
+        self.status_label['text'] = 'Status: WORKING'
         self.retry = int(self.ping_count_entry.get())
         all_hosts = list(ip_network(self.network_entry.get()))
         for num in range(int(self.max_threads_entry.get())):
@@ -162,7 +171,38 @@ class Application(tkinter.Frame):
             self.make_packet(ip)
         self.receive_q.join()
         self.receive_input()
-        self.master.destroy()
+        self.status_label['bg'] = 'green'
+        self.status_label['text'] = str('Status: DONE')
+        self.results_window()
+    def results_window(self):
+        row=0
+        column=0
+        top = tkinter.Toplevel(self)
+        top.title(str('Online Devices'))
+        top.grid()
+        label = tkinter.Label(top)
+        label['font'] = font.Font(size=13)
+        label['text'] = str('Online Devices')
+        label.grid(row=row, column=1)
+        row += 1
+        labels = []
+        for ip in self.online:
+            l = tkinter.Label(top)
+            l['font'] = font.Font(size=12)
+            l['text'] = str(ip)
+            l.grid(row=row, column=column, pady=2)
+            labels.append(l)
+            column += 2
+            s = tkinter.Label(top)
+            s['font'] = font.Font(size=12)
+            s['text'] = str('ONLINE')
+            s.grid(row=row, column=column, padx=2, pady=2)
+            labels.append(s)
+            row += 1
+            column -=2
+
+    def main_function(self):
+        main_window = Thread(target=self.main_window).start()
 
 master = tkinter.Tk()
 window = Application(master)
