@@ -159,6 +159,11 @@ class Application(tkinter.Frame):
             writer.writerows(self.database)
         csvfile.close()
     def main_window(self):
+        # Consider clearing the online / offline list - maybe empty que? 
+        self.online.clear()
+        self.offline.clear()
+        self.database.clear()
+        self.output.clear()
         self.status_label['bg'] = 'red'
         self.status_label['text'] = 'Status: WORKING'
         self.retry = int(self.ping_count_entry.get())
