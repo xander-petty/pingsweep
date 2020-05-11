@@ -112,6 +112,7 @@ class Application(tkinter.Frame):
         self.submit_button['font'] = font.Font(size=12)
         self.submit_button['text'] = str('SUBMIT')
         self.submit_button['command'] = lambda: self.main_function()
+        # self.submit_button['command'] = lambda: Process(self.main_window, args=None).start()
         self.submit_button.grid(row=10, column=3, pady=2)
     def status_label(self):
         self.status_label = tkinter.Label(self)
@@ -209,6 +210,7 @@ class Application(tkinter.Frame):
 
     def main_function(self):
         main_window = Thread(target=self.main_window).start()
+        main_window.join()
 
 master = tkinter.Tk()
 window = Application(master)
