@@ -9,7 +9,7 @@ scapy
 """
 __author__ = 'Xander Petty'
 __contact__ = 'Alexander.Petty@williams.com'
-__version__ = '1.6'
+__version__ = '1.7'
 
 from ipaddress import ip_network, ip_address 
 from scapy.all import IP, ICMP, sr1 
@@ -191,27 +191,22 @@ class Application(tkinter.Frame):
         label = tkinter.Label(top)
         label['font'] = font.Font(size=13)
         label['text'] = str('Online Devices')
-        label.grid(row=row, column=1)
+        label.grid(row=row, column=0)
         row += 1
         labels = []
+        listbox = tkinter.Listbox(top)
+        listbox.grid(row=row, column=column)
         for ip in self.online:
-            l = tkinter.Label(top)
-            l['font'] = font.Font(size=12)
-            l['text'] = str(ip)
-            l.grid(row=row, column=column, pady=2)
-            labels.append(l)
-            column += 2
-            s = tkinter.Label(top)
-            s['font'] = font.Font(size=12)
-            s['text'] = str('ONLINE')
-            s.grid(row=row, column=column, padx=2, pady=2)
-            labels.append(s)
-            row += 1
-            column -=2
+            listbox.insert(tkinter.END, str(ip))
+        scrollbar = tkinter.Scrollbar(top)
+        scrollbar.grid(row=row, column=1)
+        scrollbar.grid_configure(columnspan=listbox.size(), sticky='ns')
+        listbox.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=listbox.yview)
+
 
     def main_function(self):
         main_window = Thread(target=self.main_window).start()
-        main_window.join()
 
 master = tkinter.Tk()
 window = Application(master)
