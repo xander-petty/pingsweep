@@ -169,11 +169,12 @@ class Application(tkinter.Frame):
         self.status_label['text'] = 'Status: WORKING'
         self.retry = int(self.ping_count_entry.get())
         all_hosts = list(ip_network(self.network_entry.get()))
-        for num in range(int(self.max_threads_entry.get())):
-            t = Thread(target=self.receive_daemon)
-            t.daemon = True 
-            t.start() 
-            self.all_threads.append(t)
+        if len(self.all_threads) < 255:
+            for num in range(int(self.max_threads_entry.get())):
+                t = Thread(target=self.receive_daemon)
+                t.daemon = True 
+                t.start() 
+                self.all_threads.append(t)
         for ip in all_hosts:
             self.make_packet(ip)
         self.receive_q.join()
