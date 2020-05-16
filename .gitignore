@@ -9,3 +9,4 @@ testbed.py
 scapytest.py
 /tests
 *.bat
+.vscode/
