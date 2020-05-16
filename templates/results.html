@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+<body>
+    <table>
+        <th>
+            Results
+        </th>
+        {% for ip in ips %}
+            <tr>
+                <td>
+                    {{ ip }}
+                </td>
+                <td>
+                    Online
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+{% endblock body %}

@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block body %}
+<body>
+    <form method="POST">
+        <table>
+            <tr>
+                <td>
+                    {{ form.ip_label }}
+                </td>
+                <td>
+                    {{ form.ip_entry }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form.ping_count_label }}
+                </td>
+                <td>
+                    {{ form.ping_count_entry }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form.max_threads_label }}
+                </td>
+                <td>
+                    {{ form.max_threads_entry }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                    <script type=text/javascript>
+                        $(function() {
+                            $('a#submit').bind('click', function() {
+                                $.postJSON('/pingsweep',
+                                    function(data) {
+                                        //Return Nothing
+                                    });
+                                    return False;
+                            });
+                        });
+                    </script>
+                    <a href="#" id=submit>
+                        <button class='btn btn-default'>
+                            Submit
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+{% endblock body %}
