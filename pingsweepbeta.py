@@ -50,7 +50,8 @@ class Pinger():
         self.receive_q.join()
         self.receive_input()
         self.done = True 
-        return self.database
+        # return self.database
+        print(self.database)
     def receive_daemon(self):
         while True:
             packet = self.receive_q.get()
@@ -69,6 +70,10 @@ class Pinger():
         self.receive_q.put(packet)
     def receive_input(self):
         for ip in self.output:
+            self.online.append(ip_address(ip.src))
+        self.online = sorted(self.online)
+        self.offline = sorted(self.offline)
+        for ip in self.online:
             data = {
                 'IP': str(ip),
                 'Online': True
@@ -127,6 +132,7 @@ def main():
         #     '1.1.1.3',
         #     '1.1.1.4'
         # ]
+        print(ips)
         return render_template('results.html', ips=ips)
 
 if __name__ == '__main__':
