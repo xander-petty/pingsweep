@@ -1,17 +1,32 @@
 {% extends "layout.html" %}
 {% block body %}
 <body>
+    <h2>
+        Online
+    </h2>
     <table>
-        <th>
-            Results
-        </th>
-        {% for ip in ips %}
+        {% for ip in online_ips %}
             <tr>
                 <td>
                     {{ ip }}
                 </td>
                 <td>
                     Online
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h3>
+        Offline
+    </h3>
+    <table>
+        {% for ip in offline_ips %}
+            <tr>
+                <td>
+                    {{ ip }}
+                </td>
+                <td>
+                    Offline
                 </td>
             </tr>
         {% endfor %}

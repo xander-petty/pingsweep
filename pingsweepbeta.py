@@ -116,10 +116,13 @@ def main():
         while p.done == False:
             sleep(1)
         results = p.database
-        ips = []
+        online_ips = []
+        offline_ips = []
         for ip in results:
             if ip['Online'] == True:
-                ips.append(ip['IP'])
+                online_ips.append(ip['IP'])
+            elif ip['Online'] == False:
+                offline_ips.append(ip['IP'])
         # data = {
         #     'ip': ip,
         #     'ping_count': ping_count,
@@ -132,8 +135,7 @@ def main():
         #     '1.1.1.3',
         #     '1.1.1.4'
         # ]
-        print(ips)
-        return render_template('results.html', ips=ips)
+        return render_template('results.html', online_ips=online_ips, offline_ips=offline_ips)
 
 if __name__ == '__main__':
     app.run(ssl_context='adhoc')

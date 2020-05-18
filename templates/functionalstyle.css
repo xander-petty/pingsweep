@@ -7,6 +7,16 @@ h1 {
     color: black;
     align-content: center;
     align-self: center;
+    align-items: center;
+}
+
+form {
+    background-color: cornflowerblue;
+    font-style: normal;
+    font: bold;
+    font-size: large;
+    font-family: inherit;
+    color: black;
 }
 
 body {
