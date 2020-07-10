@@ -9,3 +9,6 @@ testbed.py
 scapytest.py
 /tests
 *.bat
+bin/
+lib/
+lib64
