@@ -138,4 +138,4 @@ def main():
         return render_template('results.html', online_ips=online_ips, offline_ips=offline_ips)
 
 if __name__ == '__main__':
-    app.run(ssl_context='adhoc')
+    app.run(host='0.0.0.0', port=80, ssl_context='adhoc', debug=True)
